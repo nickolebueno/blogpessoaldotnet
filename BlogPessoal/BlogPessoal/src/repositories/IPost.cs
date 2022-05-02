@@ -12,6 +12,5 @@ namespace BlogPessoal.src.repositories
         PostModel GetPostById(int id);
         List<PostModel> GetAllPosts();
         List<PostModel> GetPostBySearch(string title, string description, string creator);
-
     }
 }

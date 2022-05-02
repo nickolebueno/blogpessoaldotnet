@@ -52,6 +52,9 @@ namespace BlogPessoal.src.dtos
             ThemeDescription = themeDescription;
         }
 
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(30)]
         public string Title { get; set; }
 

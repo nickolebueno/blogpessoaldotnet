@@ -33,6 +33,9 @@ namespace BlogPessoal.src.dtos
             Description = description;
         }
 
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(150)]
         public string Description { get; set; }
     }
