@@ -16,6 +16,8 @@ namespace BlogPessoal.src.models
         [Required, StringLength(100)]
         public string Description { get; set; }
 
+        public string Photo { get; set; }
+
         [ForeignKey("FK_User")]
         public UsersModel Creator { get; set; }
 
