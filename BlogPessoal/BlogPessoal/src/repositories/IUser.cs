@@ -1,5 +1,6 @@
 ﻿using BlogPessoal.src.dtos;
 using BlogPessoal.src.models;
+using System.Collections.Generic;
 
 namespace BlogPessoal.src.repositories
 {
@@ -18,5 +19,6 @@ namespace BlogPessoal.src.repositories
         UsersModel GetUserById(int id);
         UsersModel GetUserByEmail(string email);
         UsersModel GetUserByName(string name);
+        List<UsersModel> GetUsersByName(string name);
     }
 }

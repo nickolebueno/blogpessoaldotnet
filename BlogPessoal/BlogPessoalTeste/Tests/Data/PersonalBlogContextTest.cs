@@ -13,11 +13,12 @@ namespace BlogPessoalTeste.Tests.Data
     [TestClass]
     public class PersonalBlogContextTest
     {
+
         private PersonalBlogContext _context;
 
-      [TestInitialize]
-      public void Initialization()
-      {
+        [TestInitialize]
+        public void Initialization()
+        {
             DbContextOptions<PersonalBlogContext> options = new DbContextOptionsBuilder<PersonalBlogContext>()
                     .UseInMemoryDatabase(databaseName: "db_blogpessoal")
                     .Options;
@@ -25,7 +26,6 @@ namespace BlogPessoalTeste.Tests.Data
             _context = new PersonalBlogContext(options);
 
         }
-
 
         [TestMethod]
         public void InsertNewUser()

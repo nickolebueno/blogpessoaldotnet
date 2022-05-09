@@ -34,7 +34,7 @@ namespace BlogPessoal.src.repositories.implementations
 
         public void UpdateTheme(UpdateThemeDTO themeDTO)
         {
-            ThemeModel model = TakeThemeById(themeDTO.Id);
+            ThemeModel model = GetThemeById(themeDTO.Id);
             model.Description = themeDTO.Description;
             _context.Update(model);
             _context.SaveChanges();
@@ -42,7 +42,7 @@ namespace BlogPessoal.src.repositories.implementations
 
         public void DeleteTheme(int id)
         {
-            _context.Theme.Remove(TakeThemeById(id));
+            _context.Theme.Remove(GetThemeById(id));
             _context.SaveChanges();
         }
 
@@ -51,12 +51,12 @@ namespace BlogPessoal.src.repositories.implementations
             return _context.Theme.ToList();
         }
 
-        public List<ThemeModel> TakeThemeByDescription(string description)
+        public List<ThemeModel> GetThemesByDescription(string description)
         {
             return _context.Theme.Where(t => t.Description == description).ToList();
         }
 
-        public ThemeModel TakeThemeById(int id)
+        public ThemeModel GetThemeById(int id)
         {
             return _context.Theme.FirstOrDefault(t => t.Id == id);
         }

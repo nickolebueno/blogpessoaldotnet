@@ -1,6 +1,7 @@
 ﻿using BlogPessoal.src.data;
 using BlogPessoal.src.dtos;
 using BlogPessoal.src.models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BlogPessoal.src.repositories.implementations
@@ -63,6 +64,11 @@ namespace BlogPessoal.src.repositories.implementations
         public UsersModel GetUserByName(string name)
         {
             return _context.User.FirstOrDefault(u => u.Name == name);
+        }
+
+        public List<UsersModel> GetUsersByName(string name)
+        {
+            throw new System.NotImplementedException();
         }
         #endregion
 

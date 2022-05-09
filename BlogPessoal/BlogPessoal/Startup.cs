@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlogPessoal.src.data;
 using Microsoft.EntityFrameworkCore;
+using BlogPessoal.src.repositories;
+using BlogPessoal.src.repositories.implementations;
 
 namespace BlogPessoal
 {
@@ -32,6 +34,12 @@ namespace BlogPessoal
                 .Build();
 
             services.AddDbContext<PersonalBlogContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUser, UserRepository>();
+            services.AddScoped<ITheme, ThemeRepository>();
+            services.AddScoped<IPost, PostRepository>();
+
+            services.AddCors();
             services.AddControllers();
 
         }
@@ -48,6 +56,12 @@ namespace BlogPessoal
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(c => c
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
             app.UseEndpoints(endpoints =>
             {

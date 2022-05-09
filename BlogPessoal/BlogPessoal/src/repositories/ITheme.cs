@@ -10,8 +10,8 @@ namespace BlogPessoal.src.repositories
         void NewTheme(NewThemeDTO themeDTO);
         void UpdateTheme(UpdateThemeDTO themeDTO);
         void DeleteTheme(int id);
-        ThemeModel TakeThemeById(int id);
-        List<ThemeModel> TakeThemeByDescription(string description);
+        ThemeModel GetThemeById(int id);
+        List<ThemeModel> GetThemesByDescription(string description);
 
     }
 }
