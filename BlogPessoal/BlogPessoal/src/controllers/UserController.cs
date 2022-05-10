@@ -1,7 +1,10 @@
 ﻿using BlogPessoal.src.dtos;
 using BlogPessoal.src.models;
 using BlogPessoal.src.repositories;
+using BlogPessoal.src.services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace BlogPessoal.src.controllers
@@ -15,13 +18,15 @@ namespace BlogPessoal.src.controllers
 
         #region Attributes
         private readonly IUser _repository;
+        private readonly IAuthentication _services;
         #endregion
 
 
         #region Constructors
-        public UserController(IUser userRepository)
+        public UserController(IUser userRepository, IAuthentication services)
         {
             _repository = userRepository;
+            _services = services;
         }
         #endregion
 
@@ -58,18 +63,30 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult NewUser ([FromBody] NewUserDTO userDTO)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            _repository.CreateUser(userDTO);
-            return Created($"api/Users/{userDTO.Email}", userDTO.Email);
+            try
+            {
+                _services.CreateUserNoDuplicates(userDTO);
+                return Created($"api/Users/email/{userDTO.Email}", userDTO.Email);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+
         }
 
         [HttpPut]
+        [Authorize(Roles = "NORMAL,ADMIN")]
         public IActionResult UpdateUser([FromBody] UpdateUserDTO userDTO)
         {
             if (!ModelState.IsValid) return BadRequest();
+
+            userDTO.Password = _services.EncodePassword(userDTO.Password);
 
             _repository.UpdateUser(userDTO);
             return Ok(userDTO);

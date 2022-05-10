@@ -13,6 +13,11 @@ using BlogPessoal.src.data;
 using Microsoft.EntityFrameworkCore;
 using BlogPessoal.src.repositories;
 using BlogPessoal.src.repositories.implementations;
+using BlogPessoal.src.services;
+using BlogPessoal.src.services.implementations;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BlogPessoal
 {
@@ -42,6 +47,26 @@ namespace BlogPessoal
             services.AddCors();
             services.AddControllers();
 
+            services.AddScoped<IAuthentication, AuthenticateServices>();
+
+            var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
+            services.AddAuthentication(a =>
+            {
+                a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(b =>
+            {
+                b.RequireHttpsMetadata = false;
+                b.SaveToken = true;
+                b.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(chave),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            }
+            );
         }
 
         // This method gets called by the runtime.Use this method to configure the HTTP request pipeline.
@@ -62,6 +87,9 @@ namespace BlogPessoal
                 .AllowAnyMethod()
                 .AllowAnyHeader()
             );
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

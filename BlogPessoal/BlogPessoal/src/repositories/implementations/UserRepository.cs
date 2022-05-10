@@ -30,7 +30,8 @@ namespace BlogPessoal.src.repositories.implementations
                 Email = userDTO.Email,
                 Name = userDTO.Name,
                 Password = userDTO.Password,
-                Photo = userDTO.Photo
+                Photo = userDTO.Photo,
+                UserType = userDTO.UserType,
             });
             _context.SaveChanges();
         }
