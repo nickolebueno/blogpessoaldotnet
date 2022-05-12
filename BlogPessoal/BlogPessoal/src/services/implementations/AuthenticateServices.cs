@@ -7,6 +7,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BlogPessoal.src.services.implementations
 {
@@ -35,12 +36,12 @@ namespace BlogPessoal.src.services.implementations
             return Convert.ToBase64String(vs);
         }
 
-        public void CreateUserNoDuplicates(NewUserDTO userDTO)
+        public async Task CreateUserNoDuplicatesAsync (NewUserDTO userDTO)
         {
-            UsersModel user = _repository.GetUserByEmail(userDTO.Email);
+            UsersModel user = await _repository.GetUserByEmailAsync(userDTO.Email);
             if (user != null) throw new Exception("Este email já está sendo utilizado");
             userDTO.Password = EncodePassword(userDTO.Password) ;
-            _repository.CreateUser(userDTO);
+             await _repository.CreateUserAsync(userDTO);
         }
 
         public string GenerateToken(UsersModel user)
@@ -65,9 +66,9 @@ namespace BlogPessoal.src.services.implementations
             return manipulationToken.WriteToken(token);
         }
 
-        public AuthorizationDTO GetAuthorization(AuthenticateDTO authenticateDTO)
+        public async Task<AuthorizationDTO> GetAuthorizationAsync(AuthenticateDTO authenticateDTO)
         {
-            var user = _repository.GetUserByEmail(authenticateDTO.Email);
+            var user = await _repository.GetUserByEmailAsync(authenticateDTO.Email);
             if (user == null) throw new Exception("User not found!");
             if (user.Password != EncodePassword(authenticateDTO.Password)) throw new Exception("Wrong password!");
             return new AuthorizationDTO(user.Id, user.Email, user.UserType, GenerateToken(user));

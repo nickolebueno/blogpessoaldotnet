@@ -33,7 +33,7 @@ namespace BlogPessoal.src.controllers
             if (!ModelState.IsValid) return BadRequest();
             try
             {
-                var autorizacao = _services.GetAuthorization(authenticationDTO);
+                var autorizacao = _services.GetAuthorizationAsync(authenticationDTO);
                 return Ok(autorizacao);
             }
             catch (Exception ex)

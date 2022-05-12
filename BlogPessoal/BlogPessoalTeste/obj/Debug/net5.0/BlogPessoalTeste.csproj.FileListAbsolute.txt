@@ -136,3 +136,4 @@ C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\
 C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoalTeste\obj\Debug\net5.0\BlogPessoalTeste.pdb
 C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoalTeste\obj\Debug\net5.0\BlogPessoalTeste.genruntimeconfig.cache
 C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoalTeste\obj\Debug\net5.0\ref\BlogPessoalTeste.dll
+C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoalTeste\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

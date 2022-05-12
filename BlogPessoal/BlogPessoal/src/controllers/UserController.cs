@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlogPessoal.src.controllers
 {
@@ -33,9 +34,9 @@ namespace BlogPessoal.src.controllers
 
         #region Methods
         [HttpGet("id/{idUser}")]
-        public IActionResult GetUserById([FromRoute] int idUser)
+        public async Task<ActionResult> GetUserByIdAsync([FromRoute] int idUser)
         {
-            UsersModel user = _repository.GetUserById(idUser);
+            UsersModel user = await _repository.GetUserByIdAsync(idUser);
 
             if (user == null) return NotFound();
 
@@ -43,9 +44,9 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsersByName([FromQuery] string name)
+        public async Task<ActionResult> GetUsersByNameAsync([FromQuery] string name)
         {
-            List<UsersModel> users = _repository.GetUsersByName(name);
+            List<UsersModel> users = await _repository.GetUsersByNameAsync(name);
 
             if (users.Count < 1) return NoContent();
 
@@ -53,9 +54,9 @@ namespace BlogPessoal.src.controllers
         }
 
         [HttpGet("email/{emailUser}")]
-        public IActionResult GetUserByEmail([FromRoute] string emailUser)
+        public async Task<ActionResult> GetUserByEmailAsync([FromRoute] string emailUser)
         {
-            UsersModel user = _repository.GetUserByEmail(emailUser);
+            UsersModel user = await _repository.GetUserByEmailAsync(emailUser);
 
             if (user == null) return NotFound();
 
@@ -64,13 +65,13 @@ namespace BlogPessoal.src.controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult NewUser ([FromBody] NewUserDTO userDTO)
+        public async Task<ActionResult> NewUserAsync([FromBody] NewUserDTO userDTO)
         {
             if (!ModelState.IsValid) return BadRequest();
 
             try
             {
-                _services.CreateUserNoDuplicates(userDTO);
+                await _services.CreateUserNoDuplicatesAsync(userDTO);
                 return Created($"api/Users/email/{userDTO.Email}", userDTO.Email);
             }
             catch (Exception ex)
@@ -82,20 +83,20 @@ namespace BlogPessoal.src.controllers
 
         [HttpPut]
         [Authorize(Roles = "NORMAL,ADMIN")]
-        public IActionResult UpdateUser([FromBody] UpdateUserDTO userDTO)
+        public async Task<ActionResult> UpdateUserAsync([FromBody] UpdateUserDTO userDTO)
         {
             if (!ModelState.IsValid) return BadRequest();
 
             userDTO.Password = _services.EncodePassword(userDTO.Password);
 
-            _repository.UpdateUser(userDTO);
+            await _repository.UpdateUserAsync(userDTO);
             return Ok(userDTO);
         }
 
         [HttpDelete("delete/{idUsuario}")]
-        public IActionResult DeleteUser([FromRoute] int idUser)
+        public async Task<ActionResult> DeleteUserAsync([FromRoute] int idUser)
         {
-            _repository.DeleteUser(idUser);
+            await _repository.DeleteUserAsync(idUser);
             return NoContent();
         }
         #endregion
