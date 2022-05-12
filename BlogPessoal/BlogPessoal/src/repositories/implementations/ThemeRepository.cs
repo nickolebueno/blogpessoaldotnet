@@ -48,7 +48,7 @@ namespace BlogPessoal.src.repositories.implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<ThemeModel>> TakeAllThemesAsync() 
+        public async Task<List<ThemeModel>> GetAllThemesAsync() 
         {
             return await _context.Theme.ToListAsync();
         }

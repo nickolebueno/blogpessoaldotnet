@@ -41,7 +41,7 @@ namespace BlogPessoal.src.services.implementations
             UsersModel user = await _repository.GetUserByEmailAsync(userDTO.Email);
             if (user != null) throw new Exception("Este email já está sendo utilizado");
             userDTO.Password = EncodePassword(userDTO.Password) ;
-             await _repository.CreateUserAsync(userDTO);
+            await _repository.CreateUserAsync(userDTO);
         }
 
         public string GenerateToken(UsersModel user)

@@ -13,6 +13,7 @@ namespace BlogPessoal.src.repositories
         Task DeleteThemeAsync(int id);
         Task<ThemeModel> GetThemeByIdAsync(int id);
         Task<List<ThemeModel>> GetThemesByDescriptionAsync(string description);
+        Task<List<ThemeModel>> GetAllThemesAsync();
 
     }
 }
