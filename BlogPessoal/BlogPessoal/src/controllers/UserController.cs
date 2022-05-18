@@ -3,6 +3,7 @@ using BlogPessoal.src.models;
 using BlogPessoal.src.repositories;
 using BlogPessoal.src.services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,16 @@ namespace BlogPessoal.src.controllers
 
 
         #region Methods
+        /// <summary>
+        /// Get user by Id
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Returns the user</response>
+        /// <response code="404">User does not exist</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsersModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id/{idUser}")]
+        [Authorize(Roles = "NORMAL,ADMIN")]
         public async Task<ActionResult> GetUserByIdAsync([FromRoute] int idUser)
         {
             UsersModel user = await _repository.GetUserByIdAsync(idUser);
@@ -43,7 +53,16 @@ namespace BlogPessoal.src.controllers
             return Ok(user);
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Get user by name
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Returns the user</response>
+        /// <response code="404">User does not exist</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsersModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("id/{nameUser}")]
+        [Authorize(Roles = "NORMAL,ADMIN")]
         public async Task<ActionResult> GetUsersByNameAsync([FromQuery] string name)
         {
             List<UsersModel> users = await _repository.GetUsersByNameAsync(name);
@@ -53,7 +72,16 @@ namespace BlogPessoal.src.controllers
             return Ok(users);
         }
 
+        /// <summary>
+        /// Get user by email
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Returns the user</response>
+        /// <response code="404">User does not exist</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsersModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("email/{emailUser}")]
+        [Authorize(Roles = "NORMAL,ADMIN")]
         public async Task<ActionResult> GetUserByEmailAsync([FromRoute] string emailUser)
         {
             UsersModel user = await _repository.GetUserByEmailAsync(emailUser);
@@ -63,6 +91,16 @@ namespace BlogPessoal.src.controllers
             return Ok(user);
         }
 
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        /// <response code="201">Returns the created user</response>
+        /// <response code="400">Request error</response>
+        /// <response code="401">Email already registered</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UsersModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> NewUserAsync([FromBody] NewUserDTO userDTO)
@@ -81,6 +119,14 @@ namespace BlogPessoal.src.controllers
 
         }
 
+        /// <summary>
+        /// Update the user
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Return user updated</response>
+        /// <response code="400">Request error</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         [Authorize(Roles = "NORMAL,ADMIN")]
         public async Task<ActionResult> UpdateUserAsync([FromBody] UpdateUserDTO userDTO)
@@ -93,7 +139,14 @@ namespace BlogPessoal.src.controllers
             return Ok(userDTO);
         }
 
-        [HttpDelete("delete/{idUsuario}")]
+        /// <summary>
+        /// Delete the user by the Id
+        /// </summary>
+        /// <returns>ActionResult</returns>
+        /// <response code="204">User deleted</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [HttpDelete("delete/{idUser}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> DeleteUserAsync([FromRoute] int idUser)
         {
             await _repository.DeleteUserAsync(idUser);

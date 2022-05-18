@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlogPessoal</name>
+    </assembly>
+    <members>
+        <member name="T:BlogPessoal.src.dtos.NewPostDTO">
+            <summary>
+            <para> DTO for create a new post </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.UpdatePostDTO">
+            <summary>
+            <para> DTO for update a new post </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.NewThemeDTO">
+            <summary>
+            <para> DTO for create a new theme </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.UpdateThemeDTO">
+            <summary>
+            <para> DTO for update the theme </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.NewUserDTO">
+            <summary>
+            <para> DTO for create a new user </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.UpdateUserDTO">
+            <summary>
+            <para> DTO for update a new user </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.dtos.DeleteUserDTO">
+            <summary>
+            <para> DTO for delete a new user </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+        <member name="T:BlogPessoal.src.repositories.IUser">
+            <summary>
+            <para>  </para>
+            <para>Criado por: Nickole Bueno</para>
+            <para>Versão: 1.0</para>
+            <para>Data: 29/04/2022</para>
+            </summary>
+        </member>
+    </members>
+</doc>
