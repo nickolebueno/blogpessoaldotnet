@@ -82,3 +82,5 @@ C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\
 C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoal\obj\Debug\net5.0\BlogPessoal.xml
+C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Nickole\Desktop\GENERATION .NET\7. BP - Visual Studio\Blog\BlogPessoal\BlogPessoal\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
